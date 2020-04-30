@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { RespuestaMovie } from '../interfaces/interfaces';
+import { RespuestaMovie, PeliculaDetalle, RespuestaCredits } from '../interfaces/interfaces';
 
 const URL = environment.url;
 const apiKey = environment.apiKey;
@@ -24,6 +24,8 @@ export class MoviesService {
   private ejectuarQuery<T>(query: string){
     query = URL + query;
     query += `&api_key=${apiKey}&language=es&include_image_language=es`;
+    console.log(query);
+    
     return this.http.get(query);
   }
 
@@ -40,5 +42,17 @@ export class MoviesService {
     this.popularesPage++;
     const query = `/discover/movie?sort_by=popularity.desc&page=${this.popularesPage}`;
     return this.ejectuarQuery<RespuestaMovie>(query);
+  }
+
+  getPeliculaDetalles(id:string){
+    return this.ejectuarQuery<PeliculaDetalle>(`/movie/${id}?a=1`);
+  }
+
+  getActoresDetalles(id:string){
+    return this.ejectuarQuery<RespuestaCredits>(`/movie/${id}/credits?a=1`);
+  }
+
+  buscarPeliculas(texto:string){
+    return this.ejectuarQuery(`/search/movie?query=${texto}`);
   }
 }
