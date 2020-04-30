@@ -30,9 +30,9 @@ export class DetalleComponent implements OnInit {
       this.pelicula = resp;
     });
     this.moviesService.getActoresDetalles(this.id)
-    .subscribe(resp => {
+    .subscribe(resp => { 
       console.log(resp);
-      this.actores = resp.cast;
+      this.actores = resp['cast'];
     });
   }
 

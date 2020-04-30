@@ -24,7 +24,7 @@
   <ion-grid fixed>
     <ion-row>
       <ion-col size="6" *ngFor="let pelicula of peliculas">
-        <ion-card (click)="detalle(pelicula.id)">
+        <ion-card (click)="verDetalle(pelicula.id)">
           <img [src]="pelicula.poster_path | imagen">
           <ion-card-header>
             <ion-card-subtitle>{{pelicula.release_date}}</ion-card-subtitle>
